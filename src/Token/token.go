@@ -1,52 +1,47 @@
-//token/token.go
-
 package token
 
 type TokenType string
 
 const (
-	ILLEGAL   = "ILLEGAL"
-	EOF 	  = "EOF"
+	ILLEGAL = "ILLEGAL"
+	EOF     = "EOF"
 
 	//identifiers and literals
-	IDENT     = "IDENT" //add, foobar, x, y, ...
-	INT 	  = "INT"	  //1347686
+	IDENT = "IDENT" //add, foobar, x, y, ...
+	INT   = "INT"   //1347686
 
 	//operators
-	ASSIGN 	  = "="
-	PLUS 	  = "+"
-	MINUS 	  = "-"
+	ASSIGN    = "="
+	PLUS      = "+"
+	MINUS     = "-"
 	ASTERISK  = "*"
-	BANG	  = "!"
+	BANG      = "!"
 	SLASH     = "/"
-	GT		  = ">"
+	GT        = ">"
 	LT        = "<"
 	EQUALS    = "=="
 	NOT_EQUAL = "!="
 
 	//delimiters
-	COMMA	  = ","
+	COMMA     = ","
 	SEMICOLON = ";"
-	COLON	  = ":"
+	COLON     = ":"
 	LPAREN    = "("
-	RPAREN	  = ")"
+	RPAREN    = ")"
 	LBRACE    = "{"
-	RBRACE	  = "{"
+	RBRACE    = "{"
 
 	//keywords
-	FUNCTION  = "FUNCTION"
-	LET 	  = "LET"
-	TRUE      = "TRUE"
-	FALSE	  = "FALSE"
-	IF        = "IF"
-	ELSE	  = "ELSE"
-	RETURN	  = "RETURN"
+	FUNCTION = "FUNCTION"
+	LET      = "LET"
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	RETURN   = "RETURN"
 )
 
 type Token struct {
-	Type	TokenType
-	Literal String
-
+	Type    TokenType
+	Literal string
 }
-
-
