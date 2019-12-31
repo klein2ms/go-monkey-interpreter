@@ -36,7 +36,7 @@ jobs:
       - name: Test Go Code
         run: go test ./src/...
         env:
-          GOPATH: /home/runner/work/go-monkey-interpreter
+          GOPATH: /home/runner/work
 
   build:
     name: Build
@@ -58,9 +58,9 @@ jobs:
               dep ensure
           fi
         env:
-          GOPATH: /home/runner/work/go-monkey-interpreter
+          GOPATH: /home/runner/work
 
       - name: Build Go Code
         run: go build -v ./src/...
         env:
-          GOPATH: /home/runner/work/go-monkey-interpreter
+          GOPATH: /home/runner/work
