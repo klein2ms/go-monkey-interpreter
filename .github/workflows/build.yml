@@ -13,18 +13,16 @@ jobs:
     
     - name: Check Out Code
       uses: actions/checkout@v1
-    
-    - name: Configure GOPATH
-      run: |
-        export PATH=$PATH:$(go env GOPATH)/bin
 
     - name: Lint Code
       run: |
+        export PATH=$PATH:$(go env GOPATH)/bin
         go get -u golang.org/x/lint/golint
         golint -set_exit_status ./src/...
 
     - name: Restore Dependencies
       run: |
+        export PATH=$PATH:$(go env GOPATH)/bin
         go get -v -t -d ./src/...
         if [ -f Gopkg.toml ]; then
             curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
@@ -32,7 +30,11 @@ jobs:
         fi        
 
     - name: Build Code
-      run: go build -v ./src/...
+      run: |
+        export PATH=$PATH:$(go env GOPATH)/bin      
+        go build -v ./src/...
     
     - name: Run Tests
-      run: go test ./src/...    
+      run: |
+        export PATH=$PATH:$(go env GOPATH)/bin
+        go test ./src/...    
