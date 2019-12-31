@@ -4,13 +4,15 @@ import (
 	"token"
 )
 
+// Lexer represents a type used to lex a string input
 type Lexer struct {
 	input        string
-	position     int  //current oposition in input (points to current char)
+	position     int  //current position in input (points to current char)
 	readPosition int  //current reading positon in input (after current char)
 	ch           byte //current char under examination
 }
 
+// New initializes a new Lexer
 func New(input string) *Lexer {
 	l := &Lexer{input: input}
 	l.readChar()
@@ -27,6 +29,7 @@ func (l *Lexer) readChar() {
 	l.readPosition++
 }
 
+// NextToken consumes the next char from the input for a given Lexer and returns a new Token
 func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
 
@@ -55,6 +58,6 @@ func (l *Lexer) NextToken() token.Token {
 	return tok
 }
 
-func newToken(tokenType token.TokenType, ch byte) token.Token { //Helps inititialize tokens
+func newToken(tokenType token.Type, ch byte) token.Token { //Helps inititialize tokens
 	return token.Token{Type: tokenType, Literal: string(ch)}
 }
