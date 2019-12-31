@@ -21,8 +21,7 @@ jobs:
         golint -set_exit_status ./src/...
 
     - name: Restore Dependencies
-      run: |
-        export PATH=$PATH:$(go env GOPATH)/bin
+      run: |        
         go get -v -t -d ./src/...
         if [ -f Gopkg.toml ]; then
             curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
@@ -30,11 +29,9 @@ jobs:
         fi        
 
     - name: Build Code
-      run: |
-        export PATH=$PATH:$(go env GOPATH)/bin      
+      run: |        
         go build -v ./src/...
     
     - name: Run Tests
-      run: |
-        export PATH=$PATH:$(go env GOPATH)/bin
+      run: |        
         go test ./src/...    
