@@ -31,10 +31,7 @@ jobs:
           go-version: 1.13
       
       - name: Check out code
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-          path: go/src/github.com/klein2ms/go-monkey-interpreter
+        uses: actions/checkout@v1        
       
       - name: Test Go Code
         run: go test ./src/...
@@ -51,10 +48,7 @@ jobs:
           go-version: 1.13
         
       - name: Check out code
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-          path: go/src/github.com/klein2ms/go-monkey-interpreter
+        uses: actions/checkout@v1        
 
       - name: Get dependencies
         run: |
