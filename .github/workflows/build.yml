@@ -2,65 +2,37 @@ name: Build and Test
 on: [push]
 
 jobs:
-
-  lint:
-    name: Lint
+  build:    
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Set up Go
-        uses: actions/setup-go@v1
-        with:
-          go-version: 1.13
-      
-      - name: Check out code
-        uses: actions/checkout@v1
-              
-      - name: Lint Go Code
-        run: |
-          export PATH=$PATH:$(go env GOPATH)/bin
-          go get -u golang.org/x/lint/golint
-          golint -set_exit_status ./src/...
-  
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up Go
-        uses: actions/setup-go@v1
-        with:
-          go-version: 1.13
-      
-      - name: Check out code
-        uses: actions/checkout@v1        
-      
-      - name: Test Go Code
-        run: |
-          export PATH=$PATH:$(go env GOPATH)/bin
-          go test ./src/...        
+    - name: Setup Go
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.13
+    
+    - name: Check Out Code
+      uses: actions/checkout@v1
+    
+    - name: Configure GOPATH
+      run: |
+        export PATH=$PATH:$(go env GOPATH)/bin
 
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up Go
-        uses: actions/setup-go@v1
-        with:
-          go-version: 1.13
-        
-      - name: Check out code
-        uses: actions/checkout@v1        
+    - name: Lint Code
+      run: |
+        go get -u golang.org/x/lint/golint
+        golint -set_exit_status ./src/...
 
-      - name: Get dependencies
-        run: |
-          export PATH=$PATH:$(go env GOPATH)/bin
-          go get -v -t -d ./src/...
-          if [ -f Gopkg.toml ]; then
-              curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-              dep ensure
-          fi        
+    - name: Restore Dependencies
+      run: |
+        go get -v -t -d ./src/...
+        if [ -f Gopkg.toml ]; then
+            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+            dep ensure
+        fi        
 
-      - name: Build Go Code
-        run: |
-          export PATH=$PATH:$(go env GOPATH)/bin
-          go build -v ./src/...
-        
+    - name: Build Code
+      run: go build -v ./src/...
+    
+    - name: Run Tests
+      run: go test ./src/...    
