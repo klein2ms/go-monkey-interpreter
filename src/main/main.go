@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/klein2ms/go-monkey-interpreter/src/lexer"
+	"github.com/klein2ms/go-monkey-interpreter/src/token"
 	"io"
-	"lexer"
 	"net/http"
-	"token"
 )
 
 func handle(w http.ResponseWriter, r *http.Request) {

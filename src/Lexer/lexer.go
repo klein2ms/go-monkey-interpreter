@@ -1,7 +1,7 @@
 package lexer
 
 import (
-	"token"
+	"github.com/klein2ms/go-monkey-interpreter/src/token"
 )
 
 // Lexer represents a type used to lex a string input
