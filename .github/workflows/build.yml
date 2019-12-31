@@ -34,9 +34,9 @@ jobs:
         uses: actions/checkout@v1        
       
       - name: Test Go Code
-        run: go test ./src/...
-        env:
-          GOPATH: /home/runner/work
+        run: |
+          export PATH=$PATH:$(go env GOPATH)/bin
+          go test ./src/...        
 
   build:
     name: Build
@@ -52,15 +52,15 @@ jobs:
 
       - name: Get dependencies
         run: |
-          go get -v -t -d ./...
+          export PATH=$PATH:$(go env GOPATH)/bin
+          go get -v -t -d ./src/...
           if [ -f Gopkg.toml ]; then
               curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
               dep ensure
-          fi
-        env:
-          GOPATH: /home/runner/work
+          fi        
 
       - name: Build Go Code
-        run: go build -v ./src/...
-        env:
-          GOPATH: /home/runner/work
+        run: |
+          export PATH=$PATH:$(go env GOPATH)/bin
+          go build -v ./src/...
+        
