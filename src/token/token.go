@@ -3,7 +3,7 @@ package token
 // Type represents the type of token for the language specification
 type Type string
 
-// Token represents the type of token and the literal string 
+// Token represents the type of token and the literal string
 // representation of that type as defined by the language specification
 type Token struct {
 	Type    Type
@@ -13,87 +13,87 @@ type Token struct {
 const (
 	// ILLEGAL represents an illegal character
 	ILLEGAL = "ILLEGAL"
-	
+
 	// EOF represents the end of the file
-	EOF     = "EOF"
+	EOF = "EOF"
 
 	// IDENT represents an identifier
 	IDENT = "IDENT" //add, foobar, x, y, ...
 
 	// INT represents an integer
-	INT   = "INT"   //1347686
+	INT = "INT" //1347686
 
 	// ASSIGN represents the assign operator
-	ASSIGN   = "="
+	ASSIGN = "="
 
 	// PLUS represents the plus operator
-	PLUS     = "+"
+	PLUS = "+"
 
 	// MINUS represents the subtraction operator
-	MINUS    = "-"
+	MINUS = "-"
 
 	// ASTERISK represents the multiplaction operator
 	ASTERISK = "*"
 
 	// BANG represents the negation operator
-	BANG     = "!"
+	BANG = "!"
 
 	// SLASH represents the forward division operator
-	SLASH    = "/"
+	SLASH = "/"
 
 	// GT represents the greater than operator
-	GT       = ">"
+	GT = ">"
 
 	// LT represents the less than operator
-	LT       = "<"
+	LT = "<"
 
 	// EQUALS represents the equals operator
-	EQUALS   = "=="
+	EQUALS = "=="
 
 	// NOTEQUAL represents the not equal operator
 	NOTEQUAL = "!="
 
 	// COMMA represents a comma delimiter
-	COMMA     = ","
+	COMMA = ","
 
 	// SEMICOLON represents a semi-colon delimiter
 	SEMICOLON = ";"
 
 	// COLON represents a colon delimiter
-	COLON     = ":"
+	COLON = ":"
 
 	// LPAREN represents a left paranthesis delimiter
-	LPAREN    = "("
+	LPAREN = "("
 
 	// RPAREN represents a right paranthesis delimiter
-	RPAREN    = ")"
+	RPAREN = ")"
 
 	// LBRACE represents a left brace delimiter
-	LBRACE    = "{"
+	LBRACE = "{"
 
-	// RBRACE represents a right brace delimiter 
-	RBRACE    = "{"
+	// RBRACE represents a right brace delimiter
+	RBRACE = "{"
 
 	// FUNCTION represents the function keyword
 	FUNCTION = "FUNCTION"
 
 	// LET represents the variable assignment keyword
-	LET      = "LET"
+	LET = "LET"
 
 	// TRUE represents the boolean true keyword
-	TRUE     = "TRUE"
+	TRUE = "TRUE"
 
 	// FALSE represents the boolean false keyword
-	FALSE    = "FALSE"
+	FALSE = "FALSE"
 
 	// IF represents the logical if keyword
-	IF       = "IF"
+	IF = "IF"
 
 	// ELSE represents the logical else keyword
-	ELSE     = "ELSE"
+	ELSE = "ELSE"
 
 	// RETURN represents the return keyword
-	RETURN   = "RETURN"
+	RETURN = "RETURN"
 )
 
 // LookupIdent maps a string identifier to the corresponding token type
