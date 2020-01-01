@@ -2,15 +2,15 @@ name: Build and Test
 on: [push]
 
 jobs:
-  build:    
+  build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Setup Go
       uses: actions/setup-go@v1
       with:
-        go-version: 1.12
-    
+        go-version: 1.13
+
     - name: Check Out Code
       uses: actions/checkout@v1
 
@@ -18,16 +18,16 @@ jobs:
       run: |
         export PATH=$PATH:$(go env GOPATH)/bin
         go get -u golang.org/x/lint/golint
-        golint -set_exit_status ./src/...
+        golint -set_exit_status ./...
 
     - name: Restore Dependencies
-      run: |        
-        go get ./src/...        
+      run: |
+        go get ./...
 
     - name: Build Code
-      run: |        
-        go build -v ./src/...
-    
+      run: |
+        go build -v ./...
+
     - name: Run Tests
-      run: |        
-        go test ./src/...    
+      run: |
+        go test ./...
