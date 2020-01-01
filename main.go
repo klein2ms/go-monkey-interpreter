@@ -2,21 +2,20 @@ package main
 
 import (
 	"fmt"
-	"github.com/klein2ms/go-monkey-interpreter/lexer"
-	"github.com/klein2ms/go-monkey-interpreter/token"
-	"io"
-	"net/http"
+	"github.com/klein2ms/go-monkey-interpreter/repl"
+	"os"
+	"os/user"
 )
 
-func handle(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "Hello, World!")
-}
-
 func main() {
-	portNumber := "9000"
-	http.HandleFunc("/", handle)
-	fmt.Println("Server listening on port ", portNumber)
-	http.ListenAndServe(":"+portNumber, nil)
-	fmt.Println(lexer.New(""))
-	fmt.Println(token.ASSIGN)
+	user, err := user.Current()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Hello %s! This is the Monkey programming language!\n",
+		user.Username)
+	fmt.Printf("Feel free to type in commands\n")
+
+	repl.Start(os.Stdin, os.Stdout)
 }
