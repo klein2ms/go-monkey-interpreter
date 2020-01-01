@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/klein2ms/go-monkey-interpreter/src/lexer"
-	"github.com/klein2ms/go-monkey-interpreter/src/token"
+	"github.com/klein2ms/go-monkey-interpreter/lexer"
+	"github.com/klein2ms/go-monkey-interpreter/token"
 	"io"
 	"net/http"
 )
