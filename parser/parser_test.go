@@ -53,6 +53,39 @@ func TestReturnStatements(t *testing.T) {
 	}
 }
 
+func TestIdentifierExpression(t *testing.T) {
+	input := "foobar;"
+
+	program := testStatement(t, input, 1)
+
+	tests := []struct {
+		expectedIdentifier string
+	}{
+		{"foobar"},
+	}
+
+	for i, tt := range tests {
+		stmt := program.Statements[i]
+		expStmt, ok := stmt.(*ast.ExpressionStatement)
+		if !ok {
+			t.Fatalf("exp not *ast.ExpressionStatement. got=%T", stmt)
+		}
+
+		ident, ok := expStmt.Expression.(*ast.Identifier)
+		if !ok {
+			t.Fatalf("exp not *ast.Identifier. got=%T", expStmt.Expression)
+		}
+
+		if ident.Value != tt.expectedIdentifier {
+			t.Errorf("ident.Value not %s. got=%s", tt.expectedIdentifier, ident.Value)
+		}
+
+		if ident.TokenLiteral() != tt.expectedIdentifier {
+			t.Errorf("ident.TokenLiteral not %s. got=%s", tt.expectedIdentifier, ident.TokenLiteral())
+		}
+	}
+}
+
 func testStatement(t *testing.T, input string, statementCount int) *ast.Program {
 	l := lexer.New(input)
 	p := New(l)
@@ -65,7 +98,7 @@ func testStatement(t *testing.T, input string, statementCount int) *ast.Program 
 	}
 
 	if len(program.Statements) != statementCount {
-		t.Fatalf("program.Statements does not contain 3 statements. got=%d", len(program.Statements))
+		t.Fatalf("program.Statements does not contain %d statements. got=%d", statementCount, len(program.Statements))
 	}
 
 	return program
