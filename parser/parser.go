@@ -133,7 +133,7 @@ func (p *Program) String() string {
 
 	return out.String()
 }
-
+// Let Statements
 func (ls *LetStatement() String() string {
 	var out bytes.Buffer
 
@@ -148,7 +148,7 @@ func (ls *LetStatement() String() string {
 
 	return out.String()
 }
-
+// Return statements
 func (rs *ReturnStatement) String() string {
 	var out bytes.buffer
 
@@ -161,7 +161,7 @@ func (rs *ReturnStatement) String() string {
 
 	return out.String()
 }
-
+// Expression statements
 func (es *ExpressionStatement) String() string {
 	if es.Expression != nil {
 		return es.Expression.String()
