@@ -5,10 +5,6 @@ import (
 	"bytes"
 )
 
-type Node interface {
-	TokenLiteral() string
-}
-
 type Statement interface {
 	Node
 	statementNode()
