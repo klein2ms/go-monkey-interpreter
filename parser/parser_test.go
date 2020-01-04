@@ -86,6 +86,40 @@ func TestIdentifierExpression(t *testing.T) {
 	}
 }
 
+func TestIntegerLiteralExpression(t *testing.T) {
+	input := "5;"
+
+	program := testStatement(t, input, 1)
+
+	tests := []struct {
+		expectedIntegerLiteral      string
+		expectedIntegerLiteralValue int64
+	}{
+		{expectedIntegerLiteral: "5", expectedIntegerLiteralValue: 5},
+	}
+
+	for i, tt := range tests {
+		stmt := program.Statements[i]
+		expStmt, ok := stmt.(*ast.ExpressionStatement)
+		if !ok {
+			t.Fatalf("exp not *ast.ExpressionStatement. got=%T", stmt)
+		}
+
+		literal, ok := expStmt.Expression.(*ast.IntegerLiteral)
+		if !ok {
+			t.Fatalf("exp not *ast.IntegerLiteral. got=%T", expStmt.Expression)
+		}
+
+		if literal.Value != tt.expectedIntegerLiteralValue {
+			t.Errorf("literal.Value not %d. got=%d", tt.expectedIntegerLiteralValue, literal.Value)
+		}
+
+		if literal.TokenLiteral() != tt.expectedIntegerLiteral {
+			t.Errorf("literal.TokenLiteral not %s. got=%s", tt.expectedIntegerLiteral, literal.TokenLiteral())
+		}
+	}
+}
+
 func testStatement(t *testing.T, input string, statementCount int) *ast.Program {
 	l := lexer.New(input)
 	p := New(l)
