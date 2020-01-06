@@ -7,13 +7,24 @@ import (
 	"github.com/klein2ms/go-monkey-interpreter/token"
 )
 
+//added two maps for prefixParseFns and infixParsefn
 type Parser struct {
 	l *lexer.Lexer
 
-	errors    []string
+	errors []string
+
 	curToken  token.Token
 	peekToken token.Token
+
+	prefixParseFns map[token.TokenType]prefixParseFn
+	infixParseFns  map[token.TokenType]infixParseFn
 }
+
+//established types for prefixParseFn and infixParseFn
+type (
+	prefixParseFn func() ast.Expression
+	infixParseFn  func(ast.Expression) ast.Expression
+)
 
 //Read two tokens, so curToken and PeekToken are both set
 func New(l *lexer.Lexer) *Parser {
@@ -106,4 +117,12 @@ func (p *Parser) expectPeekIs(t token.TokenType) bool {
 	} else {
 		return false
 	}
+}
+
+func (p *Parser) registerPrefix(tokenType token.TokenType, fn prefixParseFn) {
+	p.prefixParseFns[tokenType] = fn
+}
+
+func (p *Parser) registerInfix(tokenType token.TokenType, fn infixParseFn) {
+	p.infixParseFn[tokenType] = fn
 }
