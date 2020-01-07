@@ -224,3 +224,22 @@ func (ie *InfixExpression) String() string {
 
 	return out.String()
 }
+
+// BooleanExpression represents a boolean operator in the AST
+type BooleanExpression struct {
+	Token token.Token
+	Value bool
+}
+
+func (b *BooleanExpression) expressionNode() {
+
+}
+
+// TokenLiteral returns the TokenLiteral for the BooleanExpression operator
+func (b *BooleanExpression) TokenLiteral() string {
+	return b.Token.Literal
+}
+
+func (b *BooleanExpression) String() string {
+	return b.Token.Literal
+}
