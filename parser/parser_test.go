@@ -226,11 +226,61 @@ func TestBooleanExpression(t *testing.T) {
 		exp, ok := stmt.Expression.(*ast.BooleanExpression)
 
 		if !ok {
-			t.Fatalf("exp is not ast.BooleanExpression. got=%v", exp)
+			t.Fatalf("exp is not ast.BooleanExpression. got=%T", stmt)
 		}
 
 		if exp.Value != tt.expected {
 			t.Fatalf("exp.Value is not %t. got=%t", exp.Value, tt.expected)
+		}
+	}
+}
+
+func TestIfExpression(t *testing.T) {
+	tests := []struct {
+		input          string
+		expected       string
+		statementCount int64
+	}{
+		{`if (x < y) { x }`, ``, 1},
+	}
+
+	for _, tt := range tests {
+		program := testStatement(t, tt.input, 1)
+
+		stmt, ok := program.Statements[0].(*ast.ExpressionStatement)
+
+		if !ok {
+			t.Fatalf("program.Statements[0] is not ast.ExpressionStatement. got=%T", program.Statements[0])
+		}
+
+		exp, ok := stmt.Expression.(*ast.IfExpression)
+
+		if !ok {
+			t.Fatalf("exp is not ast.IfExpression. got=%T", stmt)
+		}
+
+		if !testInfixExpression(t, exp.Condition, "x", "<", "y") {
+			return
+		}
+
+		if len(exp.Consequence.Statements) != 1 {
+			t.Errorf("consequence is not 1 statement. got=%d\n", len(exp.Consequence.Statements))
+		}
+
+		consequence, ok := exp.Consequence.Statements[0].(*ast.ExpressionStatement)
+
+		if !ok {
+			t.Fatalf(
+				"exp.Consequence.Statements[0] is not ast.ExpressionStatement. got=%T",
+				exp.Consequence.Statements[0])
+		}
+
+		if !testIdentifier(t, consequence.Expression, "x") {
+			return
+		}
+
+		if exp.Alternative != nil {
+			t.Errorf("exp.Alternative.Statements was not nil. got=%+v", exp.Alternative)
 		}
 	}
 }
