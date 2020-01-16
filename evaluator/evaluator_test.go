@@ -8,7 +8,7 @@ import (
 )
 
 func TestEvalIntegerExpression(t *testing.T) {
-	tests := [struct] {
+	tests := []struct {
 		input	string
 		expected int64
 	}{

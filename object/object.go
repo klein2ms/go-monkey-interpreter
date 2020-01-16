@@ -1,7 +1,15 @@
+package object
+
+
 import "fmt"
 
 //defined ObjectType type
 type ObjectType string
+
+type Object interface {
+	Type() ObjectType
+	Inspect() string
+}
 
 //defined constants of INTEGER_OBJ, BOOLEAN_OBJ, and NULL_OBJ
 const (
