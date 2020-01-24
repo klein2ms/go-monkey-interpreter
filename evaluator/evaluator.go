@@ -3,12 +3,12 @@ package evaluator
 import (
 	"github.com/klein2ms/go-monkey-interpreter/object"
 	"github.com/klein2ms/go-monkey-interpreter/ast"
-
 )
 
+//Eval function for object.Object
 func Eval(node ast.Node) object.Object {
 	switch node := node.(type) {
-		
+
 //statements
 	case *ast.Program:
 		return evalStatements(node.Statements)
@@ -23,6 +23,7 @@ func Eval(node ast.Node) object.Object {
 	return nil
 }
 
+//passes evalStatements function and returns Eval(statement)
 func evalStatements(stmts []ast.Statement) object.Object {
 	var result object.Object
 
